@@ -9,7 +9,7 @@ def index(request):
     template = 'blog/index.html'
     post_list = Post.objects.select_related(
         'location', 'author', 'category'
-        ).filter(
+    ).filter(
         is_published=True,
         pub_date__lt=datetime.now(),
         category__is_published=True
@@ -30,10 +30,10 @@ def category_posts(request, category_slug):
         pub_date__lte=datetime.now()
     )
     category = get_object_or_404(
-            Category,
-            slug=category_slug,
-            is_published=True
-        )
+        Category,
+        slug=category_slug,
+        is_published=True
+    )
     context = {
         'post_list': post_list,
         'category': category
