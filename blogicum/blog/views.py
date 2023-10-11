@@ -8,13 +8,11 @@ from blog.models import Post, Category
 def index(request):
     template = 'blog/index.html'
     post_list = Post.objects.select_related(
-        'location',
-        'author',
-        'category',
-    ).filter(
+        'location', 'author', 'category'
+        ).filter(
         is_published=True,
         pub_date__lt=datetime.now(),
-        category__is_published=True,
+        category__is_published=True
     ).order_by(
         '-pub_date'
     )[:5]
@@ -24,23 +22,21 @@ def index(request):
 def category_posts(request, category_slug):
     template = 'blog/category.html'
     post_list = Post.objects.select_related(
-        'author',
-        'location',
-        'category',
+        'author', 'location', 'category'
     ).filter(
         category__slug=category_slug,
         category__is_published=True,
         is_published=True,
-        pub_date__lte=datetime.now(),
+        pub_date__lte=datetime.now()
     )
     category = get_object_or_404(
             Category,
             slug=category_slug,
-            is_published=True,
+            is_published=True
         )
     context = {
         'post_list': post_list,
-        'category': category,
+        'category': category
     }
     return render(request, template, context)
 
