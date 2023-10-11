@@ -147,3 +147,7 @@ dmypy.json
 
 # папки со статикой и медиа
 media/
+static_dev/
+*.static_dev/
+
+*.gitignore
