@@ -1,15 +1,16 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
-from core.models import IsPublishedModel, CreatedAtModel
+from core.models import PublishedCreatedModel
+from .constants import CHAR_LIMIT
 
 
 User = get_user_model()
 
 
-class Category(IsPublishedModel, CreatedAtModel):
+class Category(PublishedCreatedModel):
     title = models.CharField(
-        max_length=256,
+        max_length=CHAR_LIMIT,
         verbose_name='Заголовок',
     )
     description = models.TextField(
@@ -30,9 +31,9 @@ class Category(IsPublishedModel, CreatedAtModel):
         return self.title
 
 
-class Location(IsPublishedModel, CreatedAtModel):
+class Location(PublishedCreatedModel):
     name = models.CharField(
-        max_length=256,
+        max_length=CHAR_LIMIT,
         verbose_name='Название места',
     )
 
@@ -44,9 +45,9 @@ class Location(IsPublishedModel, CreatedAtModel):
         return self.name
 
 
-class Post(IsPublishedModel, CreatedAtModel):
+class Post(PublishedCreatedModel):
     title = models.CharField(
-        max_length=256,
+        max_length=CHAR_LIMIT,
         verbose_name='Заголовок',
     )
     text = models.TextField(
