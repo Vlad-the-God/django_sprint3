@@ -17,9 +17,7 @@ def get_post_qs():
 
 def index(request):
     template = 'blog/index.html'
-    post_list = get_post_qs().order_by(
-        '-pub_date'
-    )[:POSTS_LIMIT]
+    post_list = get_post_qs()[:POSTS_LIMIT]
     return render(request, template, {'post_list': post_list})
 
 
